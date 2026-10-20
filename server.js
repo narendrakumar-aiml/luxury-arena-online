@@ -4,16 +4,18 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
+const publicDir = path.join(__dirname, "public");
+
+app.use(express.static(publicDir));
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", game: "Luxury Arena" });
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Luxury Arena server running on port ${PORT}`);
+  console.log(`Luxury Arena running on port ${PORT}`);
 });
